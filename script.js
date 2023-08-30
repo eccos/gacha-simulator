@@ -8,10 +8,10 @@
  * d = decimal place to round
  */
 
-const inpIds = ['#percentChance', '#numTrail', '#step', '#fixedDec'];
+const inpIds = ['#percentChance', '#numTrial', '#step', '#fixedDec'];
 /** @type {HTMLInputElement[]} */
 const inps = inpIds.map(id => document.querySelector(id));
-const [inpPercentChance, inpNumTrail, inpStep, inpFixedDec] = inps;
+const [inpPercentChance, inpNumTrial, inpStep, inpFixedDec] = inps;
 inps.forEach((inp) => {
     inp.addEventListener("change", updateDOM);
 });
@@ -22,13 +22,18 @@ updateDOM();
 
 function updateDOM() {
     const p = Number(inpPercentChance.value);
-    const n = Number(inpNumTrail.value);
+    const n = Number(inpNumTrial.value);
+
+    const trialPercents = [];
+    for (let i = 1; i < n; i++) {
+        trialPercents.push(calcChance(p, i));
+    }
     elResult.textContent = calcChance(p, n);
 }
 
 function calcChance(trialPercentage, numOfTrials) {
     const [p, n] = [trialPercentage, numOfTrials];
     if (!p || !n) return;
-    const chance = 1 - Math.pow((1 - p), n);
+    const chance = (1 - Math.pow((1 - p/100), n)) * 100;
     return chance;
 }
