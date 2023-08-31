@@ -1,0 +1,66 @@
+:root {
+    --tr-bgcolor-even-h: 0;
+    --tr-bgcolor-even-s: 0%;
+    --tr-bgcolor-even-l: 10%;
+    --tr-bgcolor-odd-h: 180;
+    --tr-bgcolor-odd-s: 0%;
+    --tr-bgcolor-odd-l: 20%;
+    --tr-bgcolor-even: hsl(var(--tr-bgcolor-even-h), var(--tr-bgcolor-even-s), var(--tr-bgcolor-even-l));
+    --tr-bgcolor-odd: hsl(var(--tr-bgcolor-odd-h), var(--tr-bgcolor-odd-s), var(--tr-bgcolor-odd-l));
+    --tr-bgcolor-even-light: hsl(var(--tr-bgcolor-even-h), calc(var(--tr-bgcolor-even-s) + 20%), calc(var(--tr-bgcolor-even-l) + 10%));
+    --tr-bgcolor-odd-light: hsl(var(--tr-bgcolor-odd-h), calc(var(--tr-bgcolor-odd-s) + 20%), calc(var(--tr-bgcolor-odd-l) + 10%));
+}
+
+html {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.inp-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em 0;
+}
+
+.inp-group {
+    margin: 0 5px;
+}
+
+.inp-group label {
+    display: block;
+}
+
+table {
+    border-collapse: collapse;
+    color: white;
+}
+
+th {
+    background-color: var(--tr-bgcolor-even);
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: var(--tr-bgcolor-even);
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: var(--tr-bgcolor-odd);
+}
+
+tbody tr:nth-of-type(even):hover {
+    background-color: var(--tr-bgcolor-even-light);
+}
+
+tbody tr:nth-of-type(odd):hover {
+    background-color: var(--tr-bgcolor-odd-light);
+}
+
+th, td {
+    border: 1px solid grey;
+    padding: 5px;
+}

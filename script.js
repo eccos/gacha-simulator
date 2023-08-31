@@ -17,10 +17,10 @@ const inpIds = ['#percentChance', '#numTrial', '#step', '#fixedDec'];
 const inps = inpIds.map(id => document.querySelector(id));
 const [inpPercentChance, inpNumTrial, inpStep, inpFixedDec] = inps;
 
-inps.forEach(inp => inp.addEventListener("change", updateDOM));
+inps.forEach(inp => inp.addEventListener("input", updateDOM));
 
 // table header row
-const thVals = ["Trial", "% Chance"];
+const thVals = ["Trial", "Success %"];
 
 updateDOM();
 
