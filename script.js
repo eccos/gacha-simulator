@@ -1,10 +1,10 @@
 /**
- * gacha simulator
- * chance = 1 - (1 - p)^n
- * p = trial percentage
- * n = number of trials
+ * (gacha simulator) Probability of "At Least One"
+ * success rate = 1 - (1 - p)^n
+ * p = (drop rate) probability of success in a given trial
+ * n = (pulls) number of trials
  * configure output
- * i = store every i step(s) in array
+ * s = step(s) specifies the interval between numbers
  * d = decimal place to round
  */
 
@@ -20,7 +20,7 @@ const [inpPercentChance, inpNumTrial, inpStep, inpFixedDec] = inps;
 inps.forEach(inp => inp.addEventListener("input", updateDOM));
 
 // table header row
-const thVals = ["Trial", "Success %"];
+const thVals = ["Pull", "Success %"];
 
 updateDOM();
 
