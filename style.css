@@ -1,24 +1,29 @@
 :root {
-    --tr-bgcolor-even-h: 0;
-    --tr-bgcolor-even-s: 0%;
-    --tr-bgcolor-even-l: 10%;
-    --tr-bgcolor-odd-h: 180;
-    --tr-bgcolor-odd-s: 0%;
-    --tr-bgcolor-odd-l: 20%;
-    --tr-bgcolor-even: hsl(var(--tr-bgcolor-even-h), var(--tr-bgcolor-even-s), var(--tr-bgcolor-even-l));
-    --tr-bgcolor-odd: hsl(var(--tr-bgcolor-odd-h), var(--tr-bgcolor-odd-s), var(--tr-bgcolor-odd-l));
-    --tr-bgcolor-even-light: hsl(var(--tr-bgcolor-even-h), calc(var(--tr-bgcolor-even-s) + 20%), calc(var(--tr-bgcolor-even-l) + 10%));
-    --tr-bgcolor-odd-light: hsl(var(--tr-bgcolor-odd-h), calc(var(--tr-bgcolor-odd-s) + 20%), calc(var(--tr-bgcolor-odd-l) + 10%));
+    --tr-bgcolor1-h: 180;
+    --tr-bgcolor1-s: 20%;
+    --tr-bgcolor1-l: 20%;
+    --tr-bgcolor2-h: 0;
+    --tr-bgcolor2-s: 20%;
+    --tr-bgcolor2-l: 20%;
+    --tr-bgcolor1: hsl(var(--tr-bgcolor1-h), var(--tr-bgcolor1-s), var(--tr-bgcolor1-l));
+    --tr-bgcolor2: hsl(var(--tr-bgcolor2-h), var(--tr-bgcolor2-s), var(--tr-bgcolor2-l));
+    --tr-bgcolor1-light: hsl(var(--tr-bgcolor1-h), calc(var(--tr-bgcolor1-s) + 10%), calc(var(--tr-bgcolor1-l) + 10%));
+    --tr-bgcolor2-light: hsl(var(--tr-bgcolor2-h), calc(var(--tr-bgcolor2-s) + 10%), calc(var(--tr-bgcolor2-l) + 10%));
 }
 
-html {
+body {
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1c1c1c;
+    color: white;
 }
 
 .container {
     width: 90%;
     margin: auto;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .inp-container {
@@ -35,32 +40,57 @@ html {
     display: block;
 }
 
+input {
+    padding: 5px;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+input:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
 table {
     border-collapse: collapse;
-    color: white;
+}
+
+th,
+td {
+    padding: 5px;
+}
+
+td {
+    border-top: 1px solid grey;
 }
 
 th {
-    background-color: var(--tr-bgcolor-even);
+    background-color: var(--tr-bgcolor1);
+}
+
+tr {
+    transition-duration: .2s;
 }
 
 tbody tr:nth-of-type(even) {
-    background-color: var(--tr-bgcolor-even);
+    background-color: var(--tr-bgcolor1);
 }
 
 tbody tr:nth-of-type(odd) {
-    background-color: var(--tr-bgcolor-odd);
+    background-color: var(--tr-bgcolor2);
 }
 
 tbody tr:nth-of-type(even):hover {
-    background-color: var(--tr-bgcolor-even-light);
+    background-color: var(--tr-bgcolor1-light);
 }
 
 tbody tr:nth-of-type(odd):hover {
-    background-color: var(--tr-bgcolor-odd-light);
-}
-
-th, td {
-    border: 1px solid grey;
-    padding: 5px;
+    background-color: var(--tr-bgcolor2-light);
 }
