@@ -8,36 +8,49 @@
  * d = decimal place to round
  */
 
+// html elements
+/** @type {HTMLDivElement} */
+const elResult = document.querySelector("#result");
+// inputs
 const inpIds = ['#percentChance', '#numTrial', '#step', '#fixedDec'];
 /** @type {HTMLInputElement[]} */
 const inps = inpIds.map(id => document.querySelector(id));
 const [inpPercentChance, inpNumTrial, inpStep, inpFixedDec] = inps;
-/** @type {HTMLDivElement} */
-const elResult = document.querySelector("#result");
 
-inps.forEach((inp) => {
-    inp.addEventListener("change", updateDOM);
-});
+inps.forEach(inp => inp.addEventListener("change", updateDOM));
+
+// table header row
+const thVals = ["Trial", "% Chance"];
 
 updateDOM();
 
 function updateDOM() {
-    const p = Number(inpPercentChance.value);
-    const n = Number(inpNumTrial.value);
-
+    // parse values from inputs. if invalid, set default vals
+    const p = Number(inpPercentChance.value) || 1;
+    const n = Number(inpNumTrial.value) || 100;
+    const s = Number(inpStep.value) || 1;
+    const d = Number(inpFixedDec.value) || 2;
+    // calc % chance of a successful pull. format as tbl row data
     const trialPercents = [];
-    for (let i = 1; i <= n; i++) {
-        trialPercents.push([i, calcChance(p, i)]);
+    for (let i = s; i <= n; i += s) {
+        trialPercents.push([i, calcChance(p, i).toFixed(d)]);
     }
-    const thVals = ["Trial", "% Chance"];
+    // create table & append to page
     const tbl = createTable(thVals, trialPercents);
     elResult.innerHTML = null;
     elResult.appendChild(tbl);
 }
 
+function calcChance(trialPercentage, numOfTrials) {
+    const [p, n] = [trialPercentage, numOfTrials];
+    if (!p || !n) return;
+    const chance = (1 - Math.pow((1 - p / 100), n)) * 100;
+    return chance;
+}
+
 /**
  * Creates a table from the passed in data
- * @param {[]} [thVals] array of values to use as table headers
+ * @param {[]} [thVals] array to use as table headers
  * @param {[[]]} [trRows] array of arrays to use as table rows
  * @returns {HTMLTableElement}
  */
@@ -56,19 +69,10 @@ function createTable(thVals, trRows) {
         trRows.forEach(trRow => {
             const row = tbody.insertRow();
             trRow.forEach(rowVal => {
-                // const cell = row.insertCell();
-                // cell.textContent = i + 1;
                 const cell = row.insertCell();
                 cell.textContent = rowVal;
             })
         });
     }
     return tbl;
-}
-
-function calcChance(trialPercentage, numOfTrials) {
-    const [p, n] = [trialPercentage, numOfTrials];
-    if (!p || !n) return;
-    const chance = (1 - Math.pow((1 - p / 100), n)) * 100;
-    return chance;
 }
