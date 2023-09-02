@@ -19,6 +19,48 @@ const [inpPercentChance, inpNumTrial, inpStep, inpFixedDec] = inps;
 
 inps.forEach(inp => inp.addEventListener("input", updateDOM));
 
+/** @type {HTMLInputElement} */
+const inpPullAmt = document.querySelector("#inp-pull-amt");
+/** @type {HTMLButtonElement} */
+const btnPull = document.querySelector("#btn-pull");
+
+btnPull.addEventListener("click", () => {
+    const pullAmt = Number(inpPullAmt.value) || 1;
+    const pulls = [];
+    for (let i = 0; i < pullAmt; i++) {
+        pulls.push(simulateGachaPull());
+    }
+    console.log(pulls);
+});
+
+function simulateGachaPull() {
+    const dropRates = {
+        "star5": .01,
+        "star4": .05,
+        "star3": .1,
+        "star2": .15
+    };
+    const correctedDropRates = {};
+    let accum = 0;
+    for (const [dropRateKey, dropRate] of Object.entries(dropRates)) {
+        accum += dropRate;
+        correctedDropRates[dropRateKey] = Number(accum.toFixed(2));
+    }
+
+    const [star5, star4, star3, star2] = Object.values(correctedDropRates);
+    if (probability <= star5) {
+        return "5-star item";
+    } else if (probability <= star4) {
+        return "4-star item";
+    } else if (probability <= star3) {
+        return "3-star item";
+    } else if (probability <= star2) {
+        return "2-star item";
+    } else {
+        return "1-star item";
+    }
+}
+
 // table header row
 const thVals = ["Pull", "Success %"];
 
