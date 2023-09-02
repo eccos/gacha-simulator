@@ -94,3 +94,8 @@ tbody tr:nth-of-type(even):hover {
 tbody tr:nth-of-type(odd):hover {
     background-color: var(--tr-bgcolor2-light);
 }
+
+.gacha-item-container {
+    display: flex;
+    flex-wrap: wrap;
+}
